@@ -32,7 +32,7 @@ with requests.session() as s:
 #scraperwiki.sqlite.save(unique_keys=['name'], data={"name": "susan", "occupation": "software developer"})
 
 # setup the connection and cursor
-conn = sqlite3.connect('example.db')
+conn = sqlite3.connect('data.sqlite.db')
 conn.row_factory = sqlite3.Row
 conn.isolation_level = None
 c = conn.cursor()
