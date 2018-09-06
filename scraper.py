@@ -27,3 +27,5 @@ with requests.session() as s:
 
 	for case in cases:
 		print(case.get('title', 'No title attribute').rstrip(', '))
+
+scraperwiki.sqlite.save(unique_keys=['name'], data={"name": "susan", "occupation": "software developer"})
