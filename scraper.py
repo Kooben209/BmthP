@@ -1,3 +1,4 @@
+import scraperwiki
 import requests
 import sqlite3
 from   bs4 import BeautifulSoup
@@ -29,26 +30,4 @@ with requests.session() as s:
 	for case in cases:
 		print(case.get('title', 'No title attribute').rstrip(', '))
 
-#scraperwiki.sqlite.save(unique_keys=['name'], data={"name": "susan", "occupation": "software developer"})
-
-# setup the connection and cursor
-conn = sqlite3.connect('data.sqlite.db')
-conn.row_factory = sqlite3.Row
-conn.isolation_level = None
-c = conn.cursor()
-# create our table, only needed once
-c.execute("""
-CREATE TABLE IF NOT EXISTS data (
-name text,
-price text,
-url text
-)
-""")
-# insert some rows
-insert_sql = "INSERT INTO data (name, price, url) VALUES (?, ?, ?);"
-c.execute(insert_sql, ("Item #1", "$19.95", "http://example.com/item-1"))
-c.execute(insert_sql, ("Item #2", "$12.95", "http://example.com/item-2"))
-# get all of the rows in our table
-items = c.execute("SELECT * FROM data")
-for item in items.fetchall():
-	print(item["name"])	
+scraperwiki.sqlite.save(unique_keys=['name'], data={"name": "susan", "occupation": "software developer"})
