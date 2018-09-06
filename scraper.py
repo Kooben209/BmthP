@@ -22,12 +22,9 @@ headers = {
 
 with requests.session() as s:
 	r1 = s.request("POST", url, data=payload, headers=headers)
-	
 	soup = BeautifulSoup(r1.content, 'html.parser')
-
 	cases = soup.findAll("span", {"id" : lambda L: L and L.startswith('cphMainContent_grdCaseResults_labAddress_')})
 
 	for case in cases:
+		scraperwiki.sqlite.save(unique_keys=['address'], data={"address": case.get('title', 'No title attribute').rstrip(', ')})
 		print(case.get('title', 'No title attribute').rstrip(', '))
-
-scraperwiki.sqlite.save(unique_keys=['name'], data={"name": "susan", "occupation": "software developer"})
